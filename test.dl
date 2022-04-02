@@ -1,0 +1,9 @@
+.functor luacall_F_F(symbol, float):float
+#define SQUARE(x) @luacall_F_F("mysquare", x)
+#define SIN(x) @luacall_F_F("sin", x)
+.decl test(x : float, n : float)
+test(x, SQUARE(x)) :- x = 3.
+test(x, SQUARE(x)) :- x = 5.
+test(x, SIN(x)) :- x = 5.
+
+.output test(IO=stdout)
