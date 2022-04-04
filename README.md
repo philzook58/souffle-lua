@@ -1,3 +1,17 @@
+# souffle-lua
+
+It's pretty straightforward to make clunky lua bindings. The delta of utility on this over just using C++ is somewhat small.
+With a bit more polish it could be more useful though.
+
+Currently it just looks for a file called `souffle.lua`, loads it up.
+
+- Not safe for use in parallelism. Probably the simplest approach is to make a thread safe pool of LuaStates and just give them out as need be.
+Writing stateful lua functions is likely to cause pain anyhow.
+- It would be nice to give access, possibly pleasant access to the record table and symboltable from within lua.
+- LuaJIT might be desirable for speed.
+
+
+
  souffle::RamDomain luacall_S_S(souffle::SymbolTable* symbolTable, souffle::RecordTable* recordTable,
         souffle::RamDomain f, souffle::RamDomain arg1) {
     assert(symbolTable && "NULL symbol table");
@@ -14,4 +28,7 @@
         error(L, "function 'f' should return a number");
     lua_pop(L, 1); /* pop returned value */
     return z;
-    //return symbolTable->encode(result);# souffle-lua
+    //return symbolTable->encode(result);
+
+
+    Huh. the standard library doesn't have a pool datastructure?
